@@ -1,0 +1,47 @@
+{{- /*
+  JSON-LD CollectionPage para páginas de term (single tag / category page).
+  Reusa os @id canônicos da Organization unificada (schema.html) e do WebSite
+  do blog para não fragmentar a entidade no Knowledge Graph.
+
+  Guard: só emite quando há pelo menos uma página associada ao term —
+  páginas de term vazias não merecem schema (não agrega valor SEO).
+*/ -}}
+{{- if .Pages -}}
+  {{- $type := .Type | humanize -}}
+  {{- $title := .Title | default $type -}}
+  {{- $desc := .Description | default (printf "Posts marcados como %s no Blog Nextside." $title) -}}
+  {{- $url := .Permalink -}}
+  {{- $pageCount := len .Pages -}}
+
+  {{- $items := slice -}}
+  {{- range $idx, $p := .Pages -}}
+    {{- $items = $items | append (dict
+      "@type" "ListItem"
+      "position" (add $idx 1)
+      "url" $p.Permalink
+      "name" $p.Title
+    ) -}}
+  {{- end -}}
+
+  {{- $itemList := dict
+    "@type" "ItemList"
+    "itemListElement" $items
+    "numberOfItems" $pageCount
+  -}}
+
+  {{- $schema := dict
+    "@context" "https://schema.org"
+    "@type" "CollectionPage"
+    "@id" (printf "%s#collection" $url)
+    "url" $url
+    "name" $title
+    "description" $desc
+    "inLanguage" .Site.Language.LanguageCode
+    "isPartOf" (dict "@id" "https://blog.nextside.tech/#website")
+    "publisher" (dict "@id" "https://www.nextside.tech/#organization")
+    "mainEntity" $itemList
+  -}}
+<script type="application/ld+json">
+{{ $schema | jsonify (dict "indent" "  ") | safeJS }}
+</script>
+{{- end -}}
