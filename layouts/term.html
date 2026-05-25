@@ -1,4 +1,6 @@
 {{ define "main" }}
+{{- partial "custom/taxonomy-schema.html" . -}}
+
 <section class="ns-list-hero">
   <div class="ns-list-hero-inner">
     <p class="eyebrow">{{ .Type | humanize }}</p>
@@ -10,6 +12,14 @@
     {{- end -}}
   </div>
 </section>
+
+{{- if .Content -}}
+<section class="ns-list-content">
+  <div class="ns-list-content-inner prose">
+    {{ .Content }}
+  </div>
+</section>
+{{- end -}}
 
 <section class="ns-list-posts">
   <div class="ns-list-posts-inner">
