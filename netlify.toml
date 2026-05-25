@@ -1,7 +1,9 @@
 [build]
 publish = "public"
 # Drop --gc so the cache plugin can reuse processed assets between builds.
-command = "hugo --minify -b ${DEPLOY_PRIME_URL}"
+# Production uses baseURL from hugo.yaml (https://blog.nextside.tech/);
+# previews override via $DEPLOY_PRIME_URL in the contexts below.
+command = "hugo --minify"
 
 [build.environment]
 HUGO_VERSION = "0.161.1"
@@ -19,3 +21,9 @@ GO_VERSION = "1.22"
       "resources/_gen",
       "/opt/build/cache/hugo_cache"
     ]
+
+[context.deploy-preview]
+command = "hugo --minify -b $DEPLOY_PRIME_URL"
+
+[context.branch-deploy]
+command = "hugo --minify -b $DEPLOY_PRIME_URL"

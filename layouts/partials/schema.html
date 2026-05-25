@@ -1,99 +1,187 @@
-{{- /* === Organization (sempre presente em todas as páginas) === */ -}}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Nextside",
-  "url": "https://nextside.tech",
-  "logo": "https://blog.nextside.tech/brand/wordmark-color.svg",
-  "sameAs": [
-    "https://linkedin.com/company/nextside-tech",
-    "https://github.com/nextside-tech"
-  ]
-}
-</script>
+{{- /*
+  JSON-LD do blog Nextside.
+  Emite um único <script> com @graph contendo:
+    - Organization unificada (@id: https://www.nextside.tech/#organization)
+    - WebSite do blog (@id: https://blog.nextside.tech/#website)
+    - BlogPosting + BreadcrumbList (apenas em páginas de posts)
+  Organization espelha exatamente o objeto canônico do institucional
+  (institucional/src/lib/seo-schemas.ts → organizationSchema) para
+  não fragmentar a entidade no Knowledge Graph.
+*/ -}}
 
-{{- if and (eq .Section "posts") .IsPage -}}
-  {{- $author := "" -}}
+{{- $orgId := "https://www.nextside.tech/#organization" -}}
+{{- $websiteId := "https://blog.nextside.tech/#website" -}}
+{{- $lang := .Site.Language.LanguageCode | default "pt-BR" -}}
+
+{{- /* === Organization unificada (apêndice A do HANDOFF) === */ -}}
+{{- $organization := dict
+  "@type" "Organization"
+  "@id" $orgId
+  "name" "Nextside"
+  "alternateName" (slice "Nextside Tech" "Nextside Consultoria")
+  "legalName" "Nextside Ltda."
+  "url" "https://www.nextside.tech"
+  "logo" "https://www.nextside.tech/brand/wordmark.svg"
+  "image" "https://www.nextside.tech/opengraph-image"
+  "description" "Consultoria de software de alta performance. MVP em 4 semanas, código sênior, IA aplicada com critério."
+  "slogan" "MVP que escala. Em um mês."
+  "foundingDate" "2026-01-01"
+  "areaServed" (slice
+    (dict "@type" "Country" "name" "Brazil")
+    (dict "@type" "Place" "name" "Worldwide (remote)")
+  )
+  "taxID" "66.475.888/0001-27"
+  "vatID" "BR66475888000127"
+  "knowsAbout" (slice
+    "Software consulting"
+    "MVP development"
+    "Technical architecture"
+    "AI-assisted engineering"
+    "Next.js"
+    "TypeScript"
+    "Java Spring"
+    "Python"
+    "Go"
+    "Architecture Decision Records"
+    "Code review"
+  )
+  "sameAs" (slice
+    "https://www.linkedin.com/company/nextside-tech"
+    "https://github.com/nextside-tech"
+  )
+  "contactPoint" (dict
+    "@type" "ContactPoint"
+    "email" "contato@nextside.tech"
+    "contactType" "Sales"
+    "availableLanguage" (slice "pt-BR" "en")
+    "areaServed" "BR"
+  )
+-}}
+
+{{- /* === WebSite do blog === */ -}}
+{{- $website := dict
+  "@type" "WebSite"
+  "@id" $websiteId
+  "name" "Blog Nextside"
+  "url" "https://blog.nextside.tech"
+  "inLanguage" $lang
+  "publisher" (dict "@id" $orgId)
+  "potentialAction" (dict
+    "@type" "SearchAction"
+    "target" (dict
+      "@type" "EntryPoint"
+      "urlTemplate" "https://blog.nextside.tech/?q={search_term_string}"
+    )
+    "query-input" "required name=search_term_string"
+  )
+-}}
+
+{{- $graph := slice $organization $website -}}
+
+{{- /* === BlogPosting + BreadcrumbList só em posts === */ -}}
+{{- if and .IsPage (eq .Section "posts") -}}
+
+  {{- /* Resolve a página do autor (front-matter author = slug em /autores) */ -}}
+  {{- $authorName := "" -}}
   {{- $authorUrl := "" -}}
   {{- $authorSame := slice -}}
+  {{- $authorJobTitle := "" -}}
+  {{- $authorKnowsAbout := slice -}}
   {{- with .Params.author -}}
     {{- $authorPage := $.Site.GetPage (printf "/autores/%s" .) -}}
     {{- with $authorPage -}}
-      {{- $author = .Params.name | default .Title -}}
+      {{- $authorName = .Params.name | default .Title -}}
       {{- $authorUrl = .Permalink -}}
       {{- with .Params.sameAs -}}{{- $authorSame = . -}}{{- end -}}
+      {{- /* aceita `jobTitle` ou `role` no front-matter — Hextra usa `role` hoje */ -}}
+      {{- with .Params.jobTitle -}}{{- $authorJobTitle = . -}}{{- end -}}
+      {{- if eq $authorJobTitle "" -}}
+        {{- with .Params.role -}}{{- $authorJobTitle = . -}}{{- end -}}
+      {{- end -}}
+      {{- with .Params.knowsAbout -}}{{- $authorKnowsAbout = . -}}{{- end -}}
     {{- end -}}
   {{- end -}}
 
+  {{- /* Person inline em BlogPosting.author (@id = permalink do autor + #author) */ -}}
+  {{- $author := dict
+    "@type" "Person"
+    "name" $authorName
+    "affiliation" (dict "@id" $orgId)
+  -}}
+  {{- with $authorUrl -}}
+    {{- $author = merge $author (dict "@id" (printf "%s#author" .) "url" .) -}}
+  {{- end -}}
+  {{- if $authorSame -}}
+    {{- $author = merge $author (dict "sameAs" $authorSame) -}}
+  {{- end -}}
+  {{- if ne $authorJobTitle "" -}}
+    {{- $author = merge $author (dict "jobTitle" $authorJobTitle) -}}
+  {{- end -}}
+  {{- if $authorKnowsAbout -}}
+    {{- $author = merge $author (dict "knowsAbout" $authorKnowsAbout) -}}
+  {{- end -}}
+
+  {{- /* Imagem do post: cover do front-matter ou fallback */ -}}
   {{- $cover := .Params.cover | default "brand/wordmark-color.svg" -}}
   {{- $imageURL := printf "https://blog.nextside.tech/%s" $cover -}}
   {{- $category := .Params.category | default "" -}}
   {{- $catName := $category | humanize -}}
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": {{ .Title | jsonify }},
-  "image": {{ $imageURL | jsonify }},
-  "datePublished": {{ (.Date.Format "2006-01-02T15:04:05-07:00") | jsonify }},
-  "dateModified": {{ (.Lastmod.Format "2006-01-02T15:04:05-07:00") | jsonify }},
-  "author": {
-    "@type": "Person",
-    "name": {{ $author | jsonify }}
-    {{- with $authorUrl -}}, "url": {{ . | jsonify }}{{- end -}}
-    {{- if $authorSame -}}, "sameAs": {{ $authorSame | jsonify }}{{- end -}}
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Nextside",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://blog.nextside.tech/brand/wordmark-color.svg"
-    }
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": {{ .Permalink | jsonify }}
-  }
-  {{- with $category -}},
-  "articleSection": {{ $catName | jsonify }}
+  {{- $blogPosting := dict
+    "@type" "BlogPosting"
+    "headline" .Title
+    "image" $imageURL
+    "datePublished" (.Date.Format "2006-01-02T15:04:05-07:00")
+    "dateModified" (.Lastmod.Format "2006-01-02T15:04:05-07:00")
+    "author" $author
+    "publisher" (dict "@id" $orgId)
+    "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
+    "inLanguage" $lang
+  -}}
+  {{- with .Params.description -}}
+    {{- $blogPosting = merge $blogPosting (dict "description" .) -}}
   {{- end -}}
-  {{- with .Params.tags -}},
-  "keywords": {{ delimit . ", " | jsonify }}
+  {{- if ne $category "" -}}
+    {{- $blogPosting = merge $blogPosting (dict "articleSection" $catName) -}}
   {{- end -}}
-  {{- with .Params.description -}},
-  "description": {{ . | jsonify }}
+  {{- with .Params.tags -}}
+    {{- $blogPosting = merge $blogPosting (dict "keywords" (delimit . ", ")) -}}
   {{- end -}}
-}
-</script>
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://blog.nextside.tech/"
-    }
-    {{- with $category -}},
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": {{ $catName | jsonify }},
-      "item": {{ printf "https://blog.nextside.tech/categories/%s/" $category | jsonify }}
-    }
-    {{- end -}},
-    {
-      "@type": "ListItem",
-      "position": {{ if $category }}3{{ else }}2{{ end }},
-      "name": {{ .Title | jsonify }}
-    }
-  ]
-}
-</script>
+  {{- /* BreadcrumbList: Home > [Categoria] > Título */ -}}
+  {{- $crumbs := slice
+    (dict
+      "@type" "ListItem"
+      "position" 1
+      "name" "Home"
+      "item" "https://blog.nextside.tech/"
+    )
+  -}}
+  {{- if ne $category "" -}}
+    {{- $crumbs = $crumbs | append (dict
+      "@type" "ListItem"
+      "position" 2
+      "name" $catName
+      "item" (printf "https://blog.nextside.tech/categories/%s/" $category)
+    ) -}}
+  {{- end -}}
+  {{- $lastPos := 2 -}}
+  {{- if ne $category "" -}}{{- $lastPos = 3 -}}{{- end -}}
+  {{- $crumbs = $crumbs | append (dict
+    "@type" "ListItem"
+    "position" $lastPos
+    "name" .Title
+  ) -}}
+
+  {{- $breadcrumb := dict
+    "@type" "BreadcrumbList"
+    "itemListElement" $crumbs
+  -}}
+
+  {{- $graph = $graph | append $blogPosting $breadcrumb -}}
 {{- end -}}
+
+{{- $payload := dict "@context" "https://schema.org" "@graph" $graph -}}
+<script type="application/ld+json">
+{{ $payload | jsonify (dict "indent" "  ") | safeJS }}
+</script>
