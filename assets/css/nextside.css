@@ -98,6 +98,13 @@ h3 {
   margin: 0.5em 0;
 }
 
+/* dfn — definição de termo técnico (SAO marker) */
+.prose dfn {
+  font-style: normal;
+  font-weight: 600;
+  border-bottom: 2px dotted var(--accent);
+}
+
 /* code inline + block */
 .prose code {
   font-family: var(--font-mono);

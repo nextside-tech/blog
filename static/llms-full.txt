@@ -28,6 +28,18 @@ Eixos editoriais:
 
 ## Posts
 
+### [Code review virou o gargalo. CodeRabbit não salva sozinho](https://blog.nextside.tech/posts/2026/05/25/code-review-novo-gargalo-coderabbit/)
+
+**Data:** 2026-05-25 · **Tags:** code-review, coderabbit, ai-tooling, claude-code, devops, produtividade-dev · **Autor:** Pablo Winter
+
+**Tese central:** IA acelerou o dev individual e empurrou o gargalo pro tech lead. Código com coautoria de IA gera 1.7x mais issues por PR (dado do State of AI Code Generation Report do CodeRabbit), e o backlog de review passou a explodir em times que adotaram Cursor/Claude Code sem repensar o processo. CodeRabbit consegue tirar essa fila e deixar a esteira de PR pra `develop` 100% autônoma — mas só depois de um mês de calibração ativa, com o TL pilotando o bot, contestando comentários ruins, e adicionando path instructions no `.coderabbit.yaml`. Não é "instala e libera geral".
+
+O pulo do gato fica em duas integrações que o bot não pega sozinho: Notion via MCP (pra ler ADRs antes de revisar) e JIRA ID obrigatório na description do PR (pra cruzar AC contra diff). Com isso o CodeRabbit deixa de revisar só código e passa a revisar se o PR entrega a história — vira checklist, não opinião. Pré-requisito doloroso: US bem dimensionada com AC decente. Sem isso, "CodeRabbit vira régua sem números". O post compara CodeRabbit (profundidade, $24/dev), GitHub Copilot Code Review (raso, $10, zero atrito) e Greptile (catch alto mas 11 falso-positivos contra 2 do CodeRabbit) — escolha sua dor.
+
+> "Disciplina automatizada bate disciplina humana cansada... mas IA revisa código, IA não testa software."
+
+O fechamento amarra com os outros posts da stack: CLAUDE.md vira fonte única lida por Claude Code (ao codar), CodeRabbit (ao revisar) e Cursor (ao auto-completar) — um arquivo, três cérebros. E expõe o efeito colateral que ninguém posta no LinkedIn: time com stack completa começa a confiar demais na esteira e para de testar local. A correção é workflow inegociável com `/validar-e2e` antes do push, disparando QA matrix + backend curl/SQL + MCP Playwright em paralelo. A esteira é tua. A IA é só o motor. Quem confunde stack com processo descobre num deploy de sexta-feira.
+
 ### [MCP Playwright: validação local com qualidade real](https://blog.nextside.tech/posts/2026/05/16/mcp-playwright-validacao-local-com-qualidade/)
 
 **Data:** 2026-05-16 · **Tags:** mcp, playwright, claude-code, qualidade, testes · **Autor:** Pablo Winter

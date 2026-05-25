@@ -17,6 +17,7 @@ Site institucional: https://www.nextside.tech
 
 ## Posts
 
+- [Code review virou o gargalo. CodeRabbit não salva sozinho](https://blog.nextside.tech/posts/2026/05/25/code-review-novo-gargalo-coderabbit/): Time saiu de 2 semanas de backlog de PR pra zero review humano em staging. Como o CodeRabbit funciona, onde quebra, e por que CLAUDE.md é a fonte única.
 - [MCP Playwright: validação local com qualidade real](https://blog.nextside.tech/posts/2026/05/16/mcp-playwright-validacao-local-com-qualidade/): Antes de pedir review humano, o Claude com MCP Playwright já navegou seu app, tirou screenshot e flagou regressão. Local, no seu dev, em segundos.
 - [Claude Code superpowers: o plugin que muda o time](https://blog.nextside.tech/posts/2026/05/16/claude-code-superpowers-plugin-na-pratica/): Superpowers do Claude Code não é mais um plugin de IA — é a forma de codificar conhecimento de time num lugar que a máquina lê e executa.
 - [ADRs no Notion, sem burocracia](https://blog.nextside.tech/posts/2026/05/16/adrs-decisao-no-notion-sem-burocracia/): ADR não é cerimônia corporativa. É a forma mais barata de não repetir burrice — e de fazer Claude Code consultar suas decisões antes de codar.
