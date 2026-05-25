@@ -22,16 +22,17 @@ a stack mas tem identidade visual e conteúdo 100% Nextside.
 ## Pipeline canônico de um post novo
 
 ```
-/novo-post  →  edição humana  →  revisor-akita  →  seo-cta  →  tradutor-en  →  ux-review  →  commit
+/novo-post  →  edição humana  →  revisor-akita  →  seo-cta  →  tradutor-en  →  geo-llms  →  ux-review  →  commit
 ```
 
-1. `/novo-post` — orquestra brainstorm → outline → draft pt-BR
+1. `/novo-post` — orquestra brainstorm → outline → draft pt-BR (com checklist SAO: TL;DR citável, `<dfn>` em termos-chave, H3 interrogativo onde houver Q&A real)
 2. Autor humano edita o draft
 3. Agent `revisor-akita` — valida tom/estilo contra `docs/ESTILO-AKITA.md`
-4. Agent `seo-cta` — valida frontmatter, sugere keywords e CTA
+4. Agent `seo-cta` — valida frontmatter SEO + SAO (dfn, H3 interrogativos, blockquote-pergunta), internal linking, CTA, tag promotion (se tag virou 2+ posts, sugere criar `_index.md` curada)
 5. Agent `tradutor-en` — gera versão EN
-6. Agent `ux-review` — audita layout, contraste, mobile (**SEMPRE roda**)
-7. Commit: `post: <slug>`
+6. Agent `geo-llms` — regenera `static/llms.txt` + `static/llms-full.txt` com o post novo; reporta diff sugerido pro `public/llms.txt` do institucional (cross-link)
+7. Agent `ux-review` — audita layout, contraste, mobile (**SEMPRE roda último**)
+8. Commit: `post: <slug>`
 
 ## Documentos de verdade (em `docs/`)
 
