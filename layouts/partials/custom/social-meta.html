@@ -1,13 +1,24 @@
 {{- $title := .Title | default .Site.Title -}}
 {{- if .IsPage -}}{{- $title = printf "%s — %s" .Title .Site.Title -}}{{- end -}}
 {{- $desc := .Params.description | default .Description | default .Site.Params.description | default "Tecnologia, gestão e entregas rápidas pela Nextside — sem corporativês." -}}
+{{- /* OG image: aceita cover do front-matter (path relativo ou URL absoluta).
+       Fallback no wordmark. Sempre garante URL absoluta no <meta>. */ -}}
 {{- $image := .Params.cover | default "brand/wordmark-color.svg" -}}
-{{- $imageURL := printf "https://blog.nextside.tech/%s" $image -}}
+{{- $imageURL := "" -}}
+{{- if or (hasPrefix $image "http://") (hasPrefix $image "https://") -}}
+  {{- $imageURL = $image -}}
+{{- else -}}
+  {{- $imageURL = printf "https://blog.nextside.tech/%s" (strings.TrimPrefix "/" $image) -}}
+{{- end -}}
+{{- $imageAlt := .Params.cover_alt | default $title -}}
 {{- $locale := replace .Language.LanguageCode "-" "_" -}}
 
 <meta property="og:title" content="{{ $title }}">
 <meta property="og:description" content="{{ $desc }}">
 <meta property="og:image" content="{{ $imageURL }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{{ $imageAlt }}">
 <meta property="og:url" content="{{ .Permalink }}">
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
 <meta property="og:site_name" content="Blog Nextside">

@@ -127,6 +127,14 @@
   {{- $category := .Params.category | default "" -}}
   {{- $catName := $category | humanize -}}
 
+  {{- /* Speakable: trechos elegíveis pra TTS/voice assistants.
+         Selectors casam com a estrutura real de layouts/_default/single.html —
+         <h1> dentro do hero do post e o deck (.ns-post-deck) com o resumo. */ -}}
+  {{- $speakable := dict
+    "@type" "SpeakableSpecification"
+    "cssSelector" (slice ".ns-post-hero h1" ".ns-post-deck")
+  -}}
+
   {{- $blogPosting := dict
     "@type" "BlogPosting"
     "headline" .Title
@@ -137,6 +145,7 @@
     "publisher" (dict "@id" $orgId)
     "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
     "inLanguage" $lang
+    "speakable" $speakable
   -}}
   {{- with .Params.description -}}
     {{- $blogPosting = merge $blogPosting (dict "description" .) -}}

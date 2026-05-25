@@ -18,7 +18,7 @@ canonical: ""
 
 Toda vez que alguém fala "ADR" numa reunião, metade do time pensa em planilha do Sharepoint, comitê de arquitetura e documento de 14 páginas que ninguém lê. Eu também pensava. E aí qual é a pergunta real: ADR vale a pena pra time pequeno? Resposta curta: vale, mas não do jeito que o livro diz.
 
-ADR — **Architecture Decision Record** — é registro de decisão técnica. Curto. Datado. Imutável. Você decide algo importante hoje, escreve por que decidiu, e daqui a 6 meses quando alguém perguntar "por que diabos a gente escolheu Postgres em vez de Mongo?", a resposta tá lá. Sem ter que reconvocar a reunião perdida no calendário de fevereiro.
+<dfn>ADR — Architecture Decision Record</dfn> é registro de decisão técnica. Curto. Datado. Imutável. Você decide algo importante hoje, escreve por que decidiu, e daqui a 6 meses quando alguém perguntar "por que diabos a gente escolheu Postgres em vez de Mongo?", a resposta tá lá. Sem ter que reconvocar a reunião perdida no calendário de fevereiro.
 
 O ponto não é o template. O ponto é não perder história.
 
@@ -114,7 +114,7 @@ ADR é ótimo pro humano. Sócio entra no time, abre `docs/adr/0042-prisma-vs-se
 
 Mas agora a IA também lê seu repo. E ela precisa de **índice**, não de busca por força bruta.
 
-> "Mas a IA não consegue só grep no diretório?"
+### Mas a IA não consegue só grep no diretório?
 
 Consegue. E enche o contexto com 47 ADRs irrelevantes pra responder uma pergunta. Custa token, custa qualidade, custa tempo.
 
@@ -165,7 +165,7 @@ Pronto. 4 linhas. A IA passa a consultar o INDEX sempre que entra em modo de pla
 
 O detalhe que importa: não enche o CLAUDE.md com 47 ADRs in-line. Aponta pro INDEX. CLAUDE.md é carregado em TODA sessão — cada token gasto ali rouba contexto de coisa útil. Mantém leve. Aponta. Confia no INDEX pra fazer o resto.
 
-> "E se a IA ignorar a instrução?"
+### E se a IA ignorar a instrução?
 
 Vai ignorar uma ou outra vez, sim. Por isso entra o segundo pilar.
 

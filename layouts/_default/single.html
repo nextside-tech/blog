@@ -8,6 +8,17 @@
         {{ i18n "reading_time" .ReadingTime }}
       </p>
 
+      {{/* "Atualizado em" só aparece se .Lastmod for posterior a .Date.
+           pt-BR: "25 de mai. de 2026" (abreviação do mês já vem com ponto no locale pt-BR).
+           en:    "May 25, 2026"
+           schema.html cobre SEO; aqui é o texto visível pro leitor humano. */}}
+      {{- if .Lastmod.After .Date -}}
+        {{- $updatedLayout := cond (eq site.Language.Lang "pt-br") "2 de Jan de 2006" "Jan 2, 2006" -}}
+        <p class="eyebrow ns-post-updated">
+          {{ i18n "post_updated_on" }} {{ dateFormat $updatedLayout .Lastmod }}
+        </p>
+      {{- end -}}
+
       <h1>{{ .Title }}</h1>
 
       {{- with .Params.description -}}

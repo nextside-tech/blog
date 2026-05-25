@@ -24,7 +24,7 @@ O fluxo de dev sempre foi: codar, escrever unit, rodar a aplicação local e tes
 
 ## O que é MCP, sem o palavreado
 
-MCP — **Model Context Protocol** — é um protocolo aberto criado pela Anthropic pra ligar LLMs a ferramentas externas. Pensa em USB pra IA: padrão único, plug, e qualquer LLM compatível conversa com qualquer "MCP server" do mercado.
+<dfn>MCP — Model Context Protocol</dfn> é um protocolo aberto criado pela Anthropic pra ligar LLMs a ferramentas externas. Pensa em USB pra IA: padrão único, plug, e qualquer LLM compatível conversa com qualquer "MCP server" do mercado.
 
 Antes de MCP, integrar IA com ferramenta externa era artesanal. Cada cliente (Claude Code, Cursor, Continue) tinha sua própria forma de invocar tools. Cada tool precisava de adaptador específico. Caos.
 
@@ -104,7 +104,7 @@ Com MCP Playwright, o passo 3 vira:
 
 E a Claude abre o browser via MCP, navega, preenche, clica, verifica, tira screenshot de cada estado, reporta erro de console se houver. Você recebe: "funcionou. Evidências em `/tmp/checkout-*.png`". Anexa as screenshots no PR. **Reviewer humano abre o PR com prova visual na mão.** CI continua rodando o suite completo — esse não muda. O que muda é o seu passo manual de teste local.
 
-> "Então isso não substitui meus testes E2E?"
+### Então isso não substitui meus testes E2E?
 
 Não. E nem deveria. Seu E2E tradicional roda em CI sem precisar de IA, vive bem, valida regressão com determinismo. Esse é trabalho que engenheiro escreve uma vez e roda mil vezes. MCP Playwright é diferente: é o seu **teste exploratório local**, automatizado pela IA, com prova visual. É o passo que você fazia clicando, agora delegado.
 
@@ -167,7 +167,7 @@ por engano após aplicar desconto.
 
 Tempo total: **35 segundos**. Sem teste E2E escrito, sem stub, sem mock. **Validou contra o app de verdade, no seu localhost, antes do PR ir pra review.**
 
-> "Mas isso não substitui CI/CD com Playwright real?"
+### Mas isso não substitui CI/CD com Playwright real?
 
 Não substitui. CI/CD continua rodando o suite completo no PR. Esse fluxo é o **pre-flight**: antes de você abrir o PR, antes do CI gastar 6min, antes do reviewer humano abrir tab pra ver, você já sabe que o cenário do PO passa ou falha. A regressão acima — botão DISABLED por engano — é exatamente o tipo de bug que aparece em produção 2 sprints depois porque ninguém testou esse path manual.
 

@@ -37,6 +37,11 @@ list_empty: "Ainda sem posts por aqui — em breve."
 
 author_posts: "Posts deste autor"
 author_no_posts: "Ainda sem posts deste autor."
+author_topics: "Tópicos"
+
+# Post header — só renderiza quando .Lastmod > .Date (post editado depois de publicado)
+post_updated_on:
+  other: "Atualizado em"
 
 rss_description: "Posts da Nextside — tecnologia, gestão e entregas rápidas, sem hype."
 

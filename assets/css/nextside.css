@@ -1095,8 +1095,55 @@ h3 {
   border-color: var(--accent-hover);
 }
 
+/* Skills / topics — pílulas leves, sem agressividade visual.
+   Reaproveita tokens var(--bg-elevated)/--border pra ficar coerente com cards. */
+.ns-author-skills {
+  padding: 2rem 24px 0;
+}
+
+.ns-author-skills-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.ns-author-skills .eyebrow {
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.ns-author-skills-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ns-author-skill {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  line-height: 1;
+  color: var(--fg-muted);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 7px 12px;
+  transition: border-color 150ms ease, color 150ms ease;
+}
+
+.ns-author-skill:hover {
+  color: var(--fg);
+  border-color: var(--border-strong);
+}
+
 .ns-author-about {
-  padding: 2rem 0 1rem;
+  padding: 2rem 24px 1rem;
+}
+
+.ns-author-about-inner {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .ns-author-posts {
@@ -1128,6 +1175,8 @@ h3 {
   .ns-author-hero-inner { flex-direction: column; gap: 20px; }
   .ns-author-avatar { width: 96px; height: 96px; }
   .ns-author-bio { font-size: 18px; }
+  .ns-author-skills { padding: 1.5rem 20px 0; }
+  .ns-author-about { padding: 1.5rem 20px 0.5rem; }
   .ns-author-posts { padding: 2rem 20px 3rem; }
 }
 

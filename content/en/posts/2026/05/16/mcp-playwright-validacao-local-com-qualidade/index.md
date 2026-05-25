@@ -24,7 +24,7 @@ The dev flow has always been: code, write unit tests, run the app locally and cl
 
 ## What MCP is, without the jargon
 
-MCP — **Model Context Protocol** — is an open protocol created by Anthropic to connect LLMs to external tools. Think of it as USB for AI: one standard, plug in, and any compatible LLM talks to any "MCP server" on the market.
+<dfn>MCP — Model Context Protocol</dfn> is an open protocol created by Anthropic to connect LLMs to external tools. Think of it as USB for AI: one standard, plug in, and any compatible LLM talks to any "MCP server" on the market.
 
 Before MCP, integrating AI with external tools was artisanal. Each client (Claude Code, Cursor, Continue) had its own way of invoking tools. Each tool needed a specific adapter. Chaos.
 
@@ -104,7 +104,7 @@ With MCP Playwright, step 3 becomes:
 
 And Claude opens the browser via MCP, navigates, fills in, clicks, verifies, takes a screenshot of each state, reports console errors if any. You get back: "it worked. Evidence in `/tmp/checkout-*.png`." You attach the screenshots in the PR. **The human reviewer opens the PR with visual proof already in hand.** CI keeps running the full suite — that doesn't change. What changes is your manual test step before the PR.
 
-> "So this doesn't replace my E2E tests?"
+### So this doesn't replace my E2E tests?
 
 No. And it shouldn't. Your traditional E2E runs in CI without needing AI, works fine, validates regression deterministically. That's work the engineer writes once and runs a thousand times. MCP Playwright is different: it's your **local exploratory testing**, automated by AI, with visual proof. It's the step you used to do by clicking, now delegated.
 
@@ -167,7 +167,7 @@ by mistake after applying the discount.
 
 Total time: **35 seconds**. No E2E test written, no stub, no mock. **It validated against the real app, on your localhost, before the PR went to review.**
 
-> "But doesn't this replace real Playwright in CI/CD?"
+### But doesn't this replace real Playwright in CI/CD?
 
 It doesn't. CI/CD keeps running the full suite on every PR. This flow is the **pre-flight**: before you open the PR, before CI spends 6min, before the human reviewer opens a tab to look, you already know whether the PO's scenario passes or fails. The regression above — button DISABLED by mistake — is exactly the kind of bug that hits production 2 sprints later because nobody tested that manual path.
 

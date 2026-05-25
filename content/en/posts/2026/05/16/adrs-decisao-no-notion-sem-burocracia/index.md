@@ -18,7 +18,7 @@ canonical: ""
 
 Every time someone says "ADR" in a meeting, half the room pictures a Sharepoint spreadsheet, an architecture committee, and a 14-page document nobody reads. I thought the same thing. So here's the real question: is ADR worth it for a small team? Short answer: yes — but not the way the book says.
 
-ADR — **Architecture Decision Record** — is a record of a technical decision. Short. Dated. Immutable. You decide something important today, write down why you decided it, and six months from now when someone asks "why on earth did we pick Postgres over Mongo?", the answer is right there. No need to re-summon the lost meeting buried in February's calendar.
+<dfn>ADR — Architecture Decision Record</dfn> is a record of a technical decision. Short. Dated. Immutable. You decide something important today, write down why you decided it, and six months from now when someone asks "why on earth did we pick Postgres over Mongo?", the answer is right there. No need to re-summon the lost meeting buried in February's calendar.
 
 The point isn't the template. The point is not losing history.
 
@@ -114,7 +114,7 @@ ADRs are great for humans. New partner joins the team, opens `docs/adr/0042-pris
 
 But now AI also reads your repo. And it needs an **index**, not brute-force search.
 
-> "Can't AI just grep the directory?"
+### Can't AI just grep the directory?
 
 It can. And fills the context with 47 irrelevant ADRs to answer one question. Costs tokens, costs quality, costs time.
 
@@ -165,7 +165,7 @@ Done. 4 lines. The AI now consults the INDEX whenever it enters planning mode.
 
 The detail that matters: don't stuff your `CLAUDE.md` with 47 ADRs inline. Point at the INDEX. `CLAUDE.md` is loaded in EVERY session — every token spent there steals context from something useful. Keep it light. Point. Trust the INDEX to do the rest.
 
-> "What if the AI ignores the instruction?"
+### What if the AI ignores the instruction?
 
 It will, once in a while. That's where the second pillar comes in.
 
