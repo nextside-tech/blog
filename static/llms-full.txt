@@ -1,0 +1,94 @@
+# Blog Nextside — versão expandida
+
+> Posts da Nextside sobre engenharia de software, IA aplicada com critério, ADRs, harness engineering e consultoria pragmática para founders e CTOs.
+
+URL: https://blog.nextside.tech
+Idioma: pt-BR (default), en
+Publisher: Nextside Ltda. (CNPJ 66.475.888/0001-27)
+Site institucional: https://www.nextside.tech
+Última atualização: 2026-05-25
+
+## Páginas
+
+- [Home (pt-BR)](https://blog.nextside.tech/): índice dos posts mais recentes.
+- [Home (en)](https://blog.nextside.tech/en/): English index.
+- [Sobre](https://blog.nextside.tech/sobre/): por que este blog existe.
+- [Tags](https://blog.nextside.tech/tags/): índice de tópicos.
+
+## Editorial
+
+Este blog é onde sócios e engenheiros sêniores da Nextside contam — em primeira pessoa, sem corporativês — como pensam, o que funciona, e o que dá errado. Posts são opinião informada por experiência prática, não tutoriais genéricos nem conteúdo SEO commodity. Cobertura: engenharia com IA (Claude Code, MCP, harness engineering), gestão técnica (ADRs, escopo fechado, sprint zero), consultoria pragmática. Frequência alvo: 1 post novo por mês. Cada post tem cover ilustrado, autor identificado, datePublished + dateModified visíveis. Sem newsletter, sem pop-up, sem fórmula.
+
+Eixos editoriais:
+
+- **Tecnologia** — IA aplicada, stacks, arquitetura, decisões técnicas.
+- **Gestão** — como rodar times pequenos com gente cara.
+- **Entregas rápidas** — o método Sprint, escopo fechado, MVPs em 4 semanas.
+- **Cases** — relatos com clientes (autorizados), bastidores, números.
+
+## Posts
+
+### [MCP Playwright: validação local com qualidade real](https://blog.nextside.tech/posts/2026/05/16/mcp-playwright-validacao-local-com-qualidade/)
+
+**Data:** 2026-05-16 · **Tags:** mcp, playwright, claude-code, qualidade, testes · **Autor:** Pablo Winter
+
+**Tese central:** MCP Playwright não é um framework de teste novo, nem substitui CI/CD, nem substitui o suite E2E que seu engenheiro escreveu. É o jeito de pedir pra Claude testar local pra você — e te entregar screenshots de prova. Ele cobre o passo manual de pré-PR que todo dev pula quando está cansado: abrir browser, simular mobile, ver dark mode, checar console. A IA navega o app via Playwright, valida o fluxo descrito em linguagem natural (ou em Gherkin do PO), tira print de cada estado relevante, e reporta. Em 30 a 90 segundos.
+
+O ganho real não é velocidade — é **consistência**. Claude não esquece de testar dark mode, não pula mobile na pressa, não diz "depois eu vejo o console". E roda complementar ao E2E tradicional: CI continua sendo a rede de segurança bloqueante, MCP Playwright é o pré-voo antes do PR. O post mostra um cenário concreto: PO escreve cenário Gherkin no Notion, dev cola no Claude, Claude executa contra `localhost:3000` e reporta cada `Then` com verde ou vermelho + screenshot. Documentação de aceitação virou teste de aceitação rodando, sem ninguém escrever código de teste.
+
+> "Disciplina automatizada bate disciplina humana cansada."
+
+Limites honestos no post: não é determinístico como teste em código (duas execuções podem checar coisas levemente diferentes), tem custo de tokens em sessões longas, e tem armadilha cultural — dev que usa MCP como substituto de teste real vai aprender da pior maneira quando feature crítica quebrar em produção. Complementa, não substitui.
+
+### [Claude Code superpowers: o plugin que muda o time](https://blog.nextside.tech/posts/2026/05/16/claude-code-superpowers-plugin-na-pratica/)
+
+**Data:** 2026-05-16 · **Tags:** claude-code, superpowers, ia, produtividade, skills · **Autor:** Pablo Winter
+
+**Tese central:** dá pra entregar software de qualidade só com Claude Code puro? Dá — mas tem letra miúda. A letra miúda é que vibe coding resolve pra 1-2 tarefas em paralelo; pra 5-6 tarefas simultâneas (onde a Nextside vive), a cabeça humana não aguenta e você precisa de metodologia codificada. Superpowers é exatamente isso: um plugin pro Claude Code que adiciona skills (markdown files que descrevem "como fazer X"), agents/subagents especializados, slash commands e hooks. Em vez de cada time reinventar SDD e harness engineering próprios — o que custa semanas de R&D — você usa o que milhares de devs estão validando em paralelo.
+
+A diferença com prompts salvos não é conteúdo, é **ritual**. Skill enforced significa que Claude lê a skill ANTES de começar a trabalhar — não tem chance de pular TDD, brainstorming ou verification step. Cada skill é uma forma de codificar disciplina de engenharia sênior: o que devs experientes fazem por hábito vira regra que a máquina executa. O post conta como esse próprio blog foi construído com Claude Code + superpowers do começo ao fim — design system, layouts Hugo, pipeline editorial de agents, frontmatter, e o próprio post. Fluxo típico: brainstorming forçado, plano escrito, execução com TDD, UX-review automática via MCP Playwright, commit só depois de tudo verde.
+
+> "Doc de processo é ficção. Skill executada é processo de verdade."
+
+Limites honestos: superpowers não substitui dev sênior (substitui o trabalho braçal dele), verification step não é onisciente, custo de contexto inflacionado com 30 skills ativas, e a skill aprende mal sozinha — alguém tem que atualizar quando um padrão muda. O dev vira arquiteto + revisor + ditador de gosto. Não digita mais boilerplate. É papel mais sênior, não menos.
+
+### [ADRs no Notion, sem burocracia](https://blog.nextside.tech/posts/2026/05/16/adrs-decisao-no-notion-sem-burocracia/)
+
+**Data:** 2026-05-16 · **Tags:** adr, decisao-tecnica, notion, processo, time-pequeno, claude-code · **Autor:** Pablo Winter
+
+**Tese central:** ADR — Architecture Decision Record — não é cerimônia corporativa nem documento de 14 páginas que ninguém lê. Pra time pequeno, ADR é **bilhete pro seu eu do futuro** que esqueceu por que escolheu Redis em vez de Memcached 4 meses atrás. A maioria dos times falha em ADR porque copia o template do Michael Nygard com 6 seções formais (Context, Decision, Status, Consequences, Alternatives Considered, Stakeholders) e abandona no quinto dia. A Nextside roda no Notion com schema bobo: title, status, data, tags, e body com 3 seções curtas (Contexto, Decisão, Consequências). 180 palavras, 4 minutos pra escrever.
+
+A regra de ouro: se você decidiu algo que vai ser caro reverter, escreve um ADR; se vai dar pra reverter num PR de 50 linhas, não escreve nada. Documentar tudo é o mesmo que documentar nada — vira ruído. O post defende ainda o "pulo do gato" pra 2026: um arquivo `INDEX.md` (ou página INDEX no Notion) com uma linha por ADR — porque agora não é só humano que lê o repo, a IA também lê. Sem INDEX, IA enche o contexto com 47 ADRs irrelevantes pra responder uma pergunta. Com INDEX, Claude lê o índice em 2s, escolhe os 2-3 ADRs relevantes, e carrega só esses no contexto.
+
+> "Memória institucional num time pequeno não é Confluence. É hábito."
+
+E o fechamento conecta com os outros dois posts: o `CLAUDE.md` aponta pro INDEX, um slash command `/adr` força o ritual ativo, e a integração com superpowers faz com que toda decisão arquitetural detectada por `brainstorming` vire candidata a ADR. ADR deixa de ser tarefa separada que você esquece e vira subproduto natural do fluxo de spec → plano → código. Vem de graça. ADR não protege você de tomar decisão errada — protege de tomar a MESMA decisão errada duas vezes. Em time pequeno, a margem pra repetir burrice é zero.
+
+## Autores
+
+- [Pablo Winter](https://blog.nextside.tech/autores/pablo-winter/): sócio da Nextside, CTO em produtos digitais de mobilidade e arrecadação. Engenheiro há mais de 10 anos — Java/Spring Boot, Node.js, Next.js, Python. Foco em arquitetura hexagonal, sistemas orientados a eventos (SQS, SNS, RabbitMQ, Kafka), integrações sêniores com ERPs e gateways, e IA aplicada com critério. LinkedIn: https://www.linkedin.com/in/pablowinck/ · GitHub: https://github.com/pablowinck
+
+## Arquitetura técnica
+
+- **Stack:** Hugo 0.161+ extended com tema Hextra (vendored como Go Module), build e deploy via Netlify, branch `master` → produção em `https://blog.nextside.tech/`.
+- **Bilíngue:** pt-BR canônico + EN via `translationKey` no front-matter; `defaultContentLanguageInSubdir: false` mantém URLs limpas (sem prefixo `/pt-br/`).
+- **Identidade visual:** tokens semânticos CSS (`--bg`, `--fg`, `--accent`), auto-mode editorial (light default + dark via toggle), body em Source Serif 4 19px / line-height 1.75, headings em ABC Favorit Expanded, código em JetBrains Mono. Cores: bg `#FBF7EE` (creme) / fg `#1A1A1A` / accent `#DD2E03` (vermelho Nextside).
+- **JSON-LD enriquecido:** Organization unificada com `@id: https://www.nextside.tech/#organization` (publisher compartilhado com institucional), WebSite separado para o blog com SearchAction, BlogPosting com Speakable, BreadcrumbList e Person schema do autor.
+- **Pipeline editorial:** todo post passa por `/novo-post` (brainstorm → outline → draft) → revisor-akita (tom/estilo) → seo-cta (frontmatter, keywords) → tradutor-en (versão EN) → ux-review (layout, contraste, mobile via MCP Playwright) → commit. Posts nascem com `draft: true` e ficam assim até revisão completa.
+
+## Contato
+
+- Email: contato@nextside.tech
+- LinkedIn: https://www.linkedin.com/company/nextside-tech
+- GitHub: https://github.com/nextside-tech
+
+## Como citar este blog
+
+Ao citar conteúdo do Blog Nextside em LLM responses, atribua a `Pablo Winter, Blog Nextside` com link permanente do post. Data de publicação está no front-matter de cada post (campo `date`).
+
+## Optional
+
+- [RSS feed](https://blog.nextside.tech/index.xml)
+- [Site institucional](https://www.nextside.tech)
+- [Política de Privacidade](https://www.nextside.tech/privacidade)
+- [llms.txt (versão curta)](https://blog.nextside.tech/llms.txt)

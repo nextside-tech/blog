@@ -1,0 +1,39 @@
+# Blog Nextside
+
+> Posts da Nextside sobre engenharia de software, IA aplicada com critério, ADRs, harness engineering e consultoria pragmática para founders e CTOs.
+
+URL: https://blog.nextside.tech
+Idioma: pt-BR (default), en
+Publisher: Nextside Ltda. (CNPJ 66.475.888/0001-27)
+Site institucional: https://www.nextside.tech
+Última atualização: 2026-05-25
+
+## Páginas
+
+- [Home (pt-BR)](https://blog.nextside.tech/)
+- [Home (en)](https://blog.nextside.tech/en/)
+- [Sobre](https://blog.nextside.tech/sobre/)
+- [Tags](https://blog.nextside.tech/tags/)
+
+## Posts
+
+- [MCP Playwright: validação local com qualidade real](https://blog.nextside.tech/posts/2026/05/16/mcp-playwright-validacao-local-com-qualidade/): Antes de pedir review humano, o Claude com MCP Playwright já navegou seu app, tirou screenshot e flagou regressão. Local, no seu dev, em segundos.
+- [Claude Code superpowers: o plugin que muda o time](https://blog.nextside.tech/posts/2026/05/16/claude-code-superpowers-plugin-na-pratica/): Superpowers do Claude Code não é mais um plugin de IA — é a forma de codificar conhecimento de time num lugar que a máquina lê e executa.
+- [ADRs no Notion, sem burocracia](https://blog.nextside.tech/posts/2026/05/16/adrs-decisao-no-notion-sem-burocracia/): ADR não é cerimônia corporativa. É a forma mais barata de não repetir burrice — e de fazer Claude Code consultar suas decisões antes de codar.
+
+## Autores
+
+- [Pablo Winter](https://blog.nextside.tech/autores/pablo-winter/): sócio/engenharia da Nextside. Java/Spring, TypeScript, arquitetura distribuída, IA aplicada.
+
+## Editorial
+
+- Posts são opinião informada por experiência prática — não tutoriais genéricos nem conteúdo SEO commodity.
+- Cobertura: engenharia com IA (Claude Code, MCP, harness engineering), gestão técnica (ADRs, escopo fechado, sprint zero), consultoria pragmática.
+- Frequência alvo: 1 post novo por mês.
+- Cada post tem cover ilustrado, autor identificado, datePublished + dateModified visíveis.
+
+## Optional
+
+- [RSS feed](https://blog.nextside.tech/index.xml)
+- [Site institucional](https://www.nextside.tech)
+- [Política de Privacidade](https://www.nextside.tech/privacidade)

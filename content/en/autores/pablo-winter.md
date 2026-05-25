@@ -2,9 +2,11 @@
 title: "Pablo Winter"
 name: "Pablo Winter"
 role: "Partner · Engineering"
+jobTitle: "Partner · Software Engineering, Nextside"
 avatar: brand/autores/pablo-winter.jpg
 bio: "Nextside partner. CTO of digital products in mobility and revenue collection. 10+ years of engineering."
 translationKey: autor-pablo-winter
+url: /autores/pablo-winter/
 links:
   linkedin: https://www.linkedin.com/in/pablowinck/
   github: https://github.com/pablowinck
@@ -12,6 +14,19 @@ links:
 sameAs:
   - https://www.linkedin.com/in/pablowinck/
   - https://github.com/pablowinck
+knowsAbout:
+  - "Software consulting"
+  - "Java"
+  - "Spring Boot"
+  - "TypeScript"
+  - "Next.js"
+  - "Hexagonal architecture"
+  - "Event-driven systems"
+  - "Architecture Decision Records"
+  - "AI-assisted engineering"
+  - "Model Context Protocol (MCP)"
+  - "Claude Code"
+  - "Test-driven development"
 ---
 
 I'm a Nextside partner and CTO of digital products for mobility and revenue

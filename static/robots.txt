@@ -1,5 +1,46 @@
+# Blog Nextside — robots.txt
+# Política: ALLOW para bots de IA reputados (queremos ser citados).
+
 User-agent: *
 Allow: /
 Disallow: /admin/
+
+# OpenAI
+User-agent: GPTBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+
+# Anthropic
+User-agent: ClaudeBot
+Allow: /
+User-agent: Claude-Web
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+
+# Google
+User-agent: Google-Extended
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+User-agent: Perplexity-User
+Allow: /
+
+# Meta (Llama)
+User-agent: Meta-ExternalAgent
+Allow: /
+
+# Common Crawl
+User-agent: CCBot
+Allow: /
+
+# Bots agressivos / baixo ROI
+User-agent: Bytespider
+Disallow: /
 
 Sitemap: https://blog.nextside.tech/sitemap.xml
