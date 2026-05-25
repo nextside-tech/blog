@@ -51,7 +51,10 @@ Monte outline no formato Akita:
 [ponto principal + frase-martelo]
 
 ## H2 #2 — [nome direto]
-[contraponto + blockquote da voz do crítico]
+[contraponto + blockquote da voz do crítico]   ← OPÇÃO A: ênfase narrativa
+                                                  OPÇÃO B (preferida pra Q&A indexável):
+### Pergunta interrogativa direta?              ← H3 dentro do H2 com resposta abaixo
+[resposta concisa em 1-2 parágrafos]
 
 ## H2 #3 — [nome direto]
 [exemplo concreto + número/case]
@@ -59,6 +62,8 @@ Monte outline no formato Akita:
 ## H2 final — [título-tese, NÃO "Conclusão"]
 [aforismo de fechamento]
 ```
+
+> **Blockquote vs H3 interrogativo:** se a seção é Q&A real (leitor faria essa pergunta no Google), prefira **H3 interrogativo** — indexável por featured snippets / PAA. Blockquote fica pra citação memorável ou ênfase de tom (ex: voz do crítico sem virar pergunta direta).
 
 Apresente o outline. Pergunte:
 
@@ -79,6 +84,14 @@ Escreva o draft completo em pt-BR seguindo `docs/ESTILO-AKITA.md` LITERALMENTE.
 - ✓ Fechamento com aforismo, NÃO "Conclusão"
 - ✓ Zero corporatês ("neste artigo vamos", "no mundo de hoje", "é fundamental")
 - ✓ Listas com bold no item-chave + 1-2 frases
+- ✓ TL;DR é parágrafo isolado citável (LLM consegue extrair sem contexto)
+- ✓ Primeira menção de termo técnico-chave (siglas, jargões) marcada com <dfn>:
+    Ex: <dfn>MCP — Model Context Protocol</dfn> é...
+    Limite: 1-2 dfn por post. Não marque óbvios (TDD, CI/CD, MVP).
+- ✓ Headings em forma interrogativa quando a seção responde uma pergunta real
+    Ex: ### O que é MCP e por que importa? > ## MCP explicado
+- ✓ Sem orfanizar blockquote em forma de pergunta (`> "Isso não é X?"`):
+    Prefira H3 interrogativo + resposta direta. Blockquote = citação/ênfase, NÃO Q&A.
 
 ### Fase 6 — Frontmatter + arquivo
 
@@ -101,7 +114,10 @@ tags: [<3-6 tags kebab-case sem acento>]
 author: pablo-winter
 description: "<140-160 chars com a tese>"
 cover: covers/<slug>.png
-cover_alt: "<alt-text descritivo>"
+cover_alt: "<alt-text descritivo>"  # Vira og:image:alt. Descreva a imagem real,
+                                     # não "ilustração placeholder". 80-125 chars ideal.
+# lastmod: <opcional — só preencha se editar o post DEPOIS de publicado.
+# Renderiza "Atualizado em X" no header (Fase 2). Se mexer só no front-matter ou typos, deixe vazio.>
 cta:
   servico: <consulte docs/CATALOGO-SERVICOS.md — sprint | discovery | auditoria | none>
   posicao: ambos
@@ -120,9 +136,15 @@ Responda ao usuário:
 >
 > Próximos passos:
 > 1. Edite à vontade — ângulo, exemplos, números
-> 2. Quando estiver feliz, peça o agent `revisor-akita`
-> 3. Depois: `seo-cta`, `tradutor-en`, e **sempre** `ux-review` antes do commit
-> 4. Cover image: gere uma em `static/covers/<slug>.png` (1200×630)"
+> 2. Quando estiver feliz, rode os agents nesta ordem:
+>    a. `revisor-akita` (tom/voz)
+>    b. `seo-cta` (frontmatter SEO + SAO + tag promotion)
+>    c. `tradutor-en` (versão EN)
+>    d. `geo-llms` (regenera llms.txt + llms-full.txt, sugere entrada no institucional)
+>    e. `ux-review` (layout, contraste, mobile — SEMPRE roda último)
+> 3. Cover image: gere uma em `static/covers/<slug>.png` (1200×630, formato real, alt descritivo)
+> 4. Tag check: se alguma tag do post **já está em 1+ post existente**, o `seo-cta` vai sugerir
+>    criar `content/{pt-br,en}/tags/<slug>/_index.md` curada (CollectionPage)."
 
 ## Não faça
 
@@ -131,3 +153,6 @@ Responda ao usuário:
 - Não use 4+ perguntas seguidas — uma por vez
 - Não commit nada por conta própria — o autor decide quando
 - Não traduza pra EN automaticamente — isso é depois (`tradutor-en`)
+- Não escreva blockquote em forma de pergunta — ou converte em H3 interrogativo, ou reformula como afirmação/citação. Blockquote-pergunta é invisível pra SAO.
+- Não esqueça `<dfn>` na primeira menção de termo técnico-chave. Sem dfn, LLM/leitor passa batido pela definição.
+- Não escreva "ilustração placeholder" no `cover_alt`. Esse texto vira `og:image:alt` no LinkedIn/Twitter/WhatsApp.
