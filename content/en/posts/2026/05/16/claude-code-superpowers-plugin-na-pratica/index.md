@@ -30,7 +30,7 @@ I tested it. We tested it. This blog you're reading was built with Claude Code +
 
 And it works. For 1 task. For 2 tasks.
 
-> "So why the plugin?"
+### So why the plugin?
 
 Because the real work at Nextside isn't 1 task. It's 5. Sometimes 6.
 

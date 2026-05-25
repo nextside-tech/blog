@@ -1,30 +1,70 @@
 {{ define "main" }}
+{{- /*
+  Página de autor.
+  Fallbacks:
+    - jobTitle: usa role -> title como degradê.
+    - sameAs / links: prefere links.{linkedin,github,email}; cai pra sameAs (heurística por host).
+    - knowsAbout: omite bloco quando vazio.
+*/ -}}
+{{- $jobTitle := or .Params.jobTitle .Params.role .Title -}}
+{{- $bio := .Params.bio -}}
 <section class="ns-author-hero">
   <div class="ns-author-hero-inner">
-    {{- if .Params.avatar -}}
-      <img src="/{{ .Params.avatar }}" alt="{{ .Params.name }}" class="ns-author-avatar">
+    {{- with .Params.avatar -}}
+      <img src="/{{ . }}" alt="{{ $.Params.name | default $.Title }}" class="ns-author-avatar" loading="eager" decoding="async">
     {{- end -}}
     <div class="ns-author-meta">
-      {{- with .Params.role -}}<p class="eyebrow">{{ . }}</p>{{- end -}}
+      {{- with $jobTitle -}}<p class="eyebrow">{{ . }}</p>{{- end -}}
       <h1>{{ .Params.name | default .Title }}</h1>
-      {{- with .Params.bio -}}<p class="ns-author-bio">{{ . }}</p>{{- end -}}
+      {{- with $bio -}}<p class="ns-author-bio">{{ . }}</p>{{- end -}}
 
       <div class="ns-author-links">
+        {{- /* Prioriza front-matter "links" (mais semântico); senão usa sameAs. */ -}}
+        {{- $linkedin := "" -}}
+        {{- $github   := "" -}}
+        {{- $twitter  := "" -}}
+        {{- $email    := "" -}}
         {{- with .Params.links -}}
-          {{- with .linkedin -}}<a href="{{ . }}" rel="me">LinkedIn</a>{{- end -}}
-          {{- with .github -}}<a href="{{ . }}" rel="me">GitHub</a>{{- end -}}
-          {{- with .twitter -}}<a href="{{ . }}" rel="me">X</a>{{- end -}}
-          {{- with .email -}}<a href="mailto:{{ . }}">Email</a>{{- end -}}
+          {{- $linkedin = .linkedin -}}
+          {{- $github   = .github -}}
+          {{- $twitter  = .twitter -}}
+          {{- $email    = .email -}}
         {{- end -}}
+        {{- range .Params.sameAs -}}
+          {{- if and (not $linkedin) (in . "linkedin.com") -}}{{- $linkedin = . -}}{{- end -}}
+          {{- if and (not $github)   (in . "github.com")   -}}{{- $github   = . -}}{{- end -}}
+          {{- if and (not $twitter)  (or (in . "twitter.com") (in . "x.com")) -}}{{- $twitter = . -}}{{- end -}}
+        {{- end -}}
+
+        {{- with $linkedin -}}<a href="{{ . }}" rel="me" target="_blank">LinkedIn</a>{{- end -}}
+        {{- with $github   -}}<a href="{{ . }}" rel="me" target="_blank">GitHub</a>{{- end -}}
+        {{- with $twitter  -}}<a href="{{ . }}" rel="me" target="_blank">X</a>{{- end -}}
+        {{- with $email    -}}<a href="mailto:{{ . }}">Email</a>{{- end -}}
       </div>
     </div>
   </div>
 </section>
 
+{{- with .Params.knowsAbout -}}
+{{- /* Skills tags — visual only (knowsAbout são frases livres, não slugs de tag). */ -}}
+<section class="ns-author-skills">
+  <div class="ns-author-skills-inner">
+    <p class="eyebrow">{{ i18n "author_topics" }}</p>
+    <ul class="ns-author-skills-list">
+      {{- range . -}}
+        <li class="ns-author-skill">{{ . }}</li>
+      {{- end -}}
+    </ul>
+  </div>
+</section>
+{{- end -}}
+
 {{- with .Content -}}
 <section class="ns-author-about">
-  <div class="prose">
-    {{ . }}
+  <div class="ns-author-about-inner">
+    <div class="prose">
+      {{ . }}
+    </div>
   </div>
 </section>
 {{- end -}}

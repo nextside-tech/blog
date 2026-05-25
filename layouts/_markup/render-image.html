@@ -1,0 +1,39 @@
+{{- /*
+  Render hook customizado para imagens inline.
+  - Injeta loading="lazy" + decoding="async" para reduzir LCP/CLS.
+  - Validade alt: emite warning se vazio.
+  - Suporta URLs absolutas (externas) e relativas (resolved via .Page.Resources).
+*/ -}}
+{{- $alt := .PlainText -}}
+{{- $src := .Destination -}}
+{{- $title := .Title -}}
+
+{{- if not $alt -}}
+  {{- warnf "render-image: imagem sem alt em %s (src=%s)" .Page.Path $src -}}
+{{- end -}}
+
+{{- /* Tenta resolver via Resources (Page Bundle) */ -}}
+{{- $resource := "" -}}
+{{- if .Page -}}
+  {{- with .Page.Resources.GetMatch $src -}}
+    {{- $resource = . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if $resource -}}
+  {{- /* Imagem dentro do bundle: usar RelPermalink + dimensões reais */ -}}
+  <img src="{{ $resource.RelPermalink }}"
+       alt="{{ $alt }}"
+       {{- with $title }} title="{{ . }}"{{ end }}
+       width="{{ $resource.Width }}"
+       height="{{ $resource.Height }}"
+       loading="lazy"
+       decoding="async">
+{{- else -}}
+  {{- /* URL externa ou path estático: emitir sem width/height */ -}}
+  <img src="{{ $src }}"
+       alt="{{ $alt }}"
+       {{- with $title }} title="{{ . }}"{{ end }}
+       loading="lazy"
+       decoding="async">
+{{- end -}}

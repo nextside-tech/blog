@@ -6,7 +6,6 @@ jobTitle: "Partner · Software Engineering, Nextside"
 avatar: brand/autores/pablo-winter.jpg
 bio: "Nextside partner. CTO of digital products in mobility and revenue collection. 10+ years of engineering."
 translationKey: autor-pablo-winter
-url: /autores/pablo-winter/
 links:
   linkedin: https://www.linkedin.com/in/pablowinck/
   github: https://github.com/pablowinck

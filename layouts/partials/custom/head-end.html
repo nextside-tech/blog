@@ -45,6 +45,19 @@
 
 {{- partial "custom/social-meta.html" . -}}
 
+{{- /* hreflang: itera todas as traduções (inclui a página atual via .AllTranslations).
+       x-default aponta pro idioma default do site (pt-br), achado por Lang. */ -}}
+{{- range .AllTranslations -}}
+<link rel="alternate" hreflang="{{ .Language.LanguageCode }}" href="{{ .Permalink }}">
+{{- end -}}
+{{- /* x-default = idioma default (primeiro em .Site.Languages, ordenado por weight) */ -}}
+{{- $defaultLang := (index .Site.Languages 0).Lang -}}
+{{- range .AllTranslations -}}
+  {{- if eq .Language.Lang $defaultLang -}}
+<link rel="alternate" hreflang="x-default" href="{{ .Permalink }}">
+  {{- end -}}
+{{- end -}}
+
 <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }} RSS" href="{{ "/index.xml" | absLangURL }}">
 <link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt">
 <link rel="alternate" type="text/plain" title="llms-full.txt" href="/llms-full.txt">

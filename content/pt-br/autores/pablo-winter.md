@@ -6,7 +6,6 @@ jobTitle: "Sócio · Engenharia de Software, Nextside"
 avatar: brand/autores/pablo-winter.jpg
 bio: "Sócio da Nextside. CTO em produtos digitais de mobilidade e arrecadação. Engenheiro há mais de 10 anos."
 translationKey: autor-pablo-winter
-url: /autores/pablo-winter/
 links:
   linkedin: https://www.linkedin.com/in/pablowinck/
   github: https://github.com/pablowinck

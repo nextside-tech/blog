@@ -30,7 +30,7 @@ O [Fabio Akita escreveu sobre Agile Vibe Coding](https://akitaonrails.com/2026/0
 
 E funciona. Pra 1 tarefa. Pra 2 tarefas.
 
-> "Então pra que o plugin?"
+### Então pra que o plugin?
 
 Porque o trabalho real da Nextside não é 1 tarefa. É 5. Às vezes 6.
 
