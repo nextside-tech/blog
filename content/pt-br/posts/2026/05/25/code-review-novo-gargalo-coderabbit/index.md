@@ -88,7 +88,7 @@ Time pequeno que já paga Copilot: começa com Copilot Code Review e vê até on
 
 E honestidade: auditoria independente de 28 PRs revisados pelo CodeRabbit achou 15% de comentários "useless/noise" e 21% de nitpicking. **Não é bala de prata.** Tem que tunar. Tem que ensinar. Tem que usar os learnings. Quem instala e deixa rodando vai reclamar que é ruim — porque é, pra esse uso.
 
-{{< cta servico="auditoria" variante="mid" >}}
+{{< cta servico="auditoria" variante="mid" />}}
 
 ## Um arquivo, três cérebros: CLAUDE.md vira fonte única
 

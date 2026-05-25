@@ -88,7 +88,7 @@ Small team already paying for Copilot: start with Copilot Code Review and see ho
 
 And honesty: an independent audit of 28 PRs reviewed by CodeRabbit found 15% of comments were "useless/noise" and 21% were nitpicking. **It's not a silver bullet.** You have to tune it. You have to teach it. You have to use the learnings. Whoever installs and walks away will complain it's bad — because for that usage, it is.
 
-{{< cta servico="auditoria" variante="mid" >}}
+{{< cta servico="auditoria" variante="mid" />}}
 
 ## One file, three brains: CLAUDE.md as single source
 
