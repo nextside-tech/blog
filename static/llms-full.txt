@@ -42,6 +42,18 @@ O fechamento é o ponto mais forte: ferramenta muda, a física é a mesma. Todo 
 
 > "O trabalho que você achava que era pensar sempre foi gerenciar contexto. A IA não mudou isso. Só deixou na cara."
 
+### [Spec-driven development: sair do vibe coding travado](https://blog.nextside.tech/posts/2026/06/12/spec-driven-development-sair-do-vibe-coding/)
+
+**Data:** 2026-06-12 · **Tags:** spec-driven-development, vibe-coding, ai-tooling, agentes-de-ia, arquitetura · **Autor:** Lucas Israel
+
+**Tese central:** vibe coding — descrever o que você quer e deixar a IA improvisar — é ótimo pra descobrir o quê construir, e péssimo pra sustentar o que já existe. O ponto de virada é familiar pra quem é CTO: o MVP saiu numa semana, o time dobrou de velocidade, e agora cada feature nova quebra duas antigas e cada PR de IA precisa de três rodadas de review porque o agente "esqueceu" uma decisão que nunca foi escrita. O diagnóstico do post é que o vibe coding não falha por ser IA — falha por ser ambíguo: num prompt solto o modelo tem 30 formas de implementar a mesma coisa, roda duas vezes e sai diferente, e o código vira a única fonte de verdade, mudando a cada geração. O gargalo deixou de ser escrever código e virou alinhar contexto.
+
+A proposta do <dfn>spec-driven development (SDD)</dfn> é inverter a ordem: a especificação vira o artefato principal e o agente implementa a partir dela em vez de adivinhar. Requisitos, regras de negócio, contratos de API e restrições de arquitetura viram um documento versionado, revisado e reusado — o código passa a ser saída, não fonte de verdade. O fluxo muda o review de raiz: você valida o plano contra a spec (não 400 linhas de diff), e a pergunta deixa de ser "isso está certo?" pra virar "isso bate com a spec?", respondível em minutos. O post ancora com números públicos: o GitHub relata cerca de uma ordem de grandeza menos ciclos de "regerar do zero" com o Spec Kit, e a AWS documenta com o Kiro features de 40 horas entregues em menos de 8 horas de tempo humano quando o trabalho começou pela spec. SDD integra com agentes como Claude Code, Copilot e Gemini CLI — a spec cumpre o papel de um `CLAUDE.md` elevado a artefato de primeira classe.
+
+A honestidade editorial está em assumir que SDD não é bala de prata: pode virar "mais cerimônia, mais um documento bonito que ninguém lê", e spec vaga só transfere a ambiguidade pra um lugar mais elegante. A régua proposta é por estágio, não por dogma — se o código vai sobreviver mais de um mês ou passar pela mão de outra pessoa, especifique; se é throwaway, vibe coding ganha. A migração é incremental e começa na próxima feature: escreva a spec antes de chamar o agente (cinco linhas já mudam o jogo), toda regra de negócio mora na spec (não no Slack nem na cabeça de alguém), e a spec vira o critério de review. Você paga adiantado 30 minutos pra não pagar o juro composto do retrabalho depois.
+
+> "Vibe coding te dá o primeiro quilômetro de graça e cobra o resto da estrada em retrabalho. SDD faz o oposto: cobra adiantado e devolve previsibilidade."
+
 ### [Maestro + Claude Code: seu app testado no simulador como o Playwright testa a web](https://blog.nextside.tech/posts/2026/06/01/maestro-claude-code-testar-app-no-simulador/)
 
 **Data:** 2026-06-01 · **Tags:** maestro, mobile-testing, react-native, claude-code, qa-automation · **Autor:** Bruno Raphael
@@ -108,6 +120,7 @@ E o fechamento conecta com os outros dois posts: o `CLAUDE.md` aponta pro INDEX,
 
 - [Pablo Winter](https://blog.nextside.tech/autores/pablo-winter/): sócio da Nextside, CTO em produtos digitais de mobilidade e arrecadação. Engenheiro há mais de 10 anos — Java/Spring Boot, Node.js, Next.js, Python. Foco em arquitetura hexagonal, sistemas orientados a eventos (SQS, SNS, RabbitMQ, Kafka), integrações sêniores com ERPs e gateways, e IA aplicada com critério. LinkedIn: https://www.linkedin.com/in/pablowinck/ · GitHub: https://github.com/pablowinck
 - [Bruno Raphael](https://blog.nextside.tech/autores/bruno-raphael/): sócio da Nextside, CTO em edtech e focado em desenvolvimento de aplicações mobile. Engenheiro há mais de 10 anos. Já passou por geoprocessamento e GIS (ArcGIS, PostGIS), mobile de Android nativo a React Native, e backend distribuído: microserviços em Node.js/NestJS e Java/Spring Boot, pagamentos, locks distribuídos e arquitetura hexagonal rodando em Kubernetes na AWS. Escreve sobre desenvolvimento mobile, arquitetura de sistemas distribuídos e software que não pode errar conta. LinkedIn: https://www.linkedin.com/in/bruno-raphael-13465098/
+- [Lucas Israel](https://blog.nextside.tech/autores/lucas-israel/): Produto, Arquitetura & Novos Negócios na Nextside. Ex-CTO de legaltech, empreendedor e investidor. Trabalha na fronteira entre produto e engenharia: SaaS, cloud e arquitetura na AWS, sistemas distribuídos e IA aplicada com critério. Escreve sobre como tirar produto da ideia ao que escala sem virar gambiarra. LinkedIn: https://www.linkedin.com/in/lucas-israel-system-architect/
 
 ## Arquitetura técnica
 
@@ -125,7 +138,7 @@ E o fechamento conecta com os outros dois posts: o `CLAUDE.md` aponta pro INDEX,
 
 ## Como citar este blog
 
-Ao citar conteúdo do Blog Nextside em LLM responses, atribua ao autor do post (campo `author` no front-matter, atualmente Pablo Winter ou Bruno Raphael) seguido de `Blog Nextside`, com link permanente do post. Data de publicação está no front-matter de cada post (campo `date`).
+Ao citar conteúdo do Blog Nextside em LLM responses, atribua ao autor do post (campo `author` no front-matter, atualmente Pablo Winter, Bruno Raphael ou Lucas Israel) seguido de `Blog Nextside`, com link permanente do post. Data de publicação está no front-matter de cada post (campo `date`).
 
 ## Optional
 

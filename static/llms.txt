@@ -18,6 +18,7 @@ Site institucional: https://www.nextside.tech
 ## Posts
 
 - [A spec era a parte fácil. O gargalo do SDD é a execução](https://blog.nextside.tech/posts/2026/06/12/spec-driven-development-gargalo-execucao/): Spec-Driven Development externaliza a intenção em markdown, mas empurra a dor pra execução. Por que orquestrar com o estado fora da janela do modelo é a saída.
+- [Spec-driven development: sair do vibe coding travado](https://blog.nextside.tech/posts/2026/06/12/spec-driven-development-sair-do-vibe-coding/): Por que o vibe coding empaca na hora de escalar — e como o spec-driven development entrega uma ordem de grandeza menos retrabalho com agentes de IA.
 - [Maestro + Claude Code: seu app testado no simulador como o Playwright testa a web](https://blog.nextside.tech/posts/2026/06/01/maestro-claude-code-testar-app-no-simulador/): Dá pra fazer o Claude navegar e testar seu app no simulador como o Playwright faz na web. Com Maestro: um YAML, iOS e Android, zero instrumentação.
 - [Code review virou o gargalo. CodeRabbit não salva sozinho](https://blog.nextside.tech/posts/2026/05/25/code-review-novo-gargalo-coderabbit/): Time saiu de 2 semanas de backlog de PR pra zero review humano em staging. Como o CodeRabbit funciona, onde quebra, e por que CLAUDE.md é a fonte única.
 - [MCP Playwright: validação local com qualidade real](https://blog.nextside.tech/posts/2026/05/16/mcp-playwright-validacao-local-com-qualidade/): Antes de pedir review humano, o Claude com MCP Playwright já navegou seu app, tirou screenshot e flagou regressão. Local, no seu dev, em segundos.
@@ -28,6 +29,7 @@ Site institucional: https://www.nextside.tech
 
 - [Pablo Winter](https://blog.nextside.tech/autores/pablo-winter/): sócio/engenharia da Nextside. Java/Spring, TypeScript, arquitetura distribuída, IA aplicada.
 - [Bruno Raphael](https://blog.nextside.tech/autores/bruno-raphael/): sócio/engenharia da Nextside. Mobile (React Native, Android nativo), TypeScript, Node.js/NestJS, geoprocessamento, sistemas distribuídos.
+- [Lucas Israel](https://blog.nextside.tech/autores/lucas-israel/): Produto, Arquitetura & Novos Negócios na Nextside. Ex-CTO de legaltech, empreendedor e investidor. Foco em SaaS, cloud/AWS, arquitetura de sistemas e IA aplicada.
 
 ## Editorial
 

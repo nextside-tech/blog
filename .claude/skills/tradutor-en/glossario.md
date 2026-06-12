@@ -6,6 +6,7 @@ como adaptar termos específicos.
 ## NÃO traduzir (manter em inglês também na versão EN)
 
 - vibe coding
+- spec-driven development / SDD / spec
 - slop
 - all-in
 - one-off
