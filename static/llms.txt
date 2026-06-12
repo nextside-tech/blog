@@ -6,7 +6,7 @@ URL: https://blog.nextside.tech
 Idioma: pt-BR (default), en
 Publisher: Nextside Ltda. (CNPJ 66.475.888/0001-27)
 Site institucional: https://www.nextside.tech
-Última atualização: 2026-05-25
+Última atualização: 2026-06-01
 
 ## Páginas
 
@@ -17,6 +17,7 @@ Site institucional: https://www.nextside.tech
 
 ## Posts
 
+- [Maestro + Claude Code: seu app testado no simulador como o Playwright testa a web](https://blog.nextside.tech/posts/2026/06/01/maestro-claude-code-testar-app-no-simulador/): Dá pra fazer o Claude navegar e testar seu app no simulador como o Playwright faz na web. Com Maestro: um YAML, iOS e Android, zero instrumentação.
 - [Code review virou o gargalo. CodeRabbit não salva sozinho](https://blog.nextside.tech/posts/2026/05/25/code-review-novo-gargalo-coderabbit/): Time saiu de 2 semanas de backlog de PR pra zero review humano em staging. Como o CodeRabbit funciona, onde quebra, e por que CLAUDE.md é a fonte única.
 - [MCP Playwright: validação local com qualidade real](https://blog.nextside.tech/posts/2026/05/16/mcp-playwright-validacao-local-com-qualidade/): Antes de pedir review humano, o Claude com MCP Playwright já navegou seu app, tirou screenshot e flagou regressão. Local, no seu dev, em segundos.
 - [Claude Code superpowers: o plugin que muda o time](https://blog.nextside.tech/posts/2026/05/16/claude-code-superpowers-plugin-na-pratica/): Superpowers do Claude Code não é mais um plugin de IA — é a forma de codificar conhecimento de time num lugar que a máquina lê e executa.
@@ -25,6 +26,7 @@ Site institucional: https://www.nextside.tech
 ## Autores
 
 - [Pablo Winter](https://blog.nextside.tech/autores/pablo-winter/): sócio/engenharia da Nextside. Java/Spring, TypeScript, arquitetura distribuída, IA aplicada.
+- [Bruno Raphael](https://blog.nextside.tech/autores/bruno-raphael/): sócio/engenharia da Nextside. Mobile (React Native, Android nativo), TypeScript, Node.js/NestJS, geoprocessamento, sistemas distribuídos.
 
 ## Editorial
 

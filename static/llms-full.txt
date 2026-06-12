@@ -6,7 +6,7 @@ URL: https://blog.nextside.tech
 Idioma: pt-BR (default), en
 Publisher: Nextside Ltda. (CNPJ 66.475.888/0001-27)
 Site institucional: https://www.nextside.tech
-Última atualização: 2026-05-25
+Última atualização: 2026-06-01
 
 ## Páginas
 
@@ -27,6 +27,20 @@ Eixos editoriais:
 - **Cases** — relatos com clientes (autorizados), bastidores, números.
 
 ## Posts
+
+### [Maestro + Claude Code: seu app testado no simulador como o Playwright testa a web](https://blog.nextside.tech/posts/2026/06/01/maestro-claude-code-testar-app-no-simulador/)
+
+**Data:** 2026-06-01 · **Tags:** maestro, mobile-testing, react-native, claude-code, qa-automation · **Autor:** Bruno Raphael
+
+**Tese central:** o Claude Code já navega um site sozinho via Playwright (clica, preenche, valida regressão), e dá pra fechar o mesmo buraco no mobile, só que ninguém explica direito como. A resposta é o Maestro, framework open source de teste E2E mobile com flows declarativos em YAML, plugado no Claude Code. Um único arquivo de teste roda igual em iOS e Android, sobre o binário compilado (APK/IPA), sem instrumentar o app nem instalar driver. React Native, nativo ou Flutter, tanto faz. O ponto contraintuitivo: o caminho certo NÃO é "dar acesso à tela pro Claude". Screenshot por coordenada (Computer Use) é o último recurso, não o primeiro.
+
+O argumento de fundo é a diferença entre ler a árvore de acessibilidade e olhar pixel. O Playwright nunca olhou pixel nenhum, age por elemento estruturado, e é por isso que é rápido e não alucina onde clicar. A diferença é mensurável em token: a accessibility tree de uma tela sai por uns 10 tokens, e um screenshot da mesma tela custa de 1.600 a 6.300. Multiplica por cada passo de um teste de vinte telas e visão deixa de escalar num loop de QA. A própria Anthropic ordena a hierarquia de ferramentas do Claude Code assim: MCP primeiro, depois shell, depois Chrome, e só cai pro controle de tela quando nada mais alcança. O Maestro vive na primeira camada, a estruturada e barata.
+
+O loop na prática é o que muda o jogo: o Claude inspeciona a tela ao vivo (`inspect_screen` devolve a view hierarchy como JSON compacto), escreve o flow YAML sem caçar element ID na mão, roda no simulador, e quando algo quebra relê a hierarquia, diagnostica e conserta o próprio teste, te mostrando o diff pra aprovar. O Maestro chama isso de self-healing, e é a manutenção de teste (a parte mais chata de QA) saindo das suas costas. No React Native, o que torna o loop confiável é o `testID`: prefira sempre `testID` a texto, porque texto muda com tradução e revisão de copy. O post ainda destrincha a escolha entre MCP (plug-and-play, mas carrega schema de tools no contexto e queima token) e Skill+CLI (mais enxuto, sem overhead de servidor), com a regra prática de começar no MCP pra prototipar e migrar pra Skill quando o fluxo vira rotina.
+
+A parte honesta que ninguém posta: teste gerado por IA acerta 70 a 80% na primeira passada, então o fluxo certo é deixar a IA gerar a v1, validar rodando uma vez, e devolver a manutenção pra ela, nunca "manda e esquece". E o iOS cobra pedágio: um dev documentou montar o mesmo QA nas duas plataformas e o Android levou 90 minutos enquanto o iOS passou de seis horas. Pedras específicas do React Native (componente aninhado que engole o toque no iOS, Expo Go que não aceita `launchApp`) aparecem com a correção de cada uma. O fechamento amarra com o post de CodeRabbit: a IA agora TESTA, navegando o app como usuário faria, mas continua sem decidir o que conta como "funcionou". Esse julgamento e o critério de aceite seguem sendo humanos.
+
+> "Android te dá um WebSocket e diz: aqui está o app, faça o que quiser. iOS te dá uma porta trancada e um bilhete pedindo pra usar o Xcode."
 
 ### [Code review virou o gargalo. CodeRabbit não salva sozinho](https://blog.nextside.tech/posts/2026/05/25/code-review-novo-gargalo-coderabbit/)
 
@@ -79,6 +93,7 @@ E o fechamento conecta com os outros dois posts: o `CLAUDE.md` aponta pro INDEX,
 ## Autores
 
 - [Pablo Winter](https://blog.nextside.tech/autores/pablo-winter/): sócio da Nextside, CTO em produtos digitais de mobilidade e arrecadação. Engenheiro há mais de 10 anos — Java/Spring Boot, Node.js, Next.js, Python. Foco em arquitetura hexagonal, sistemas orientados a eventos (SQS, SNS, RabbitMQ, Kafka), integrações sêniores com ERPs e gateways, e IA aplicada com critério. LinkedIn: https://www.linkedin.com/in/pablowinck/ · GitHub: https://github.com/pablowinck
+- [Bruno Raphael](https://blog.nextside.tech/autores/bruno-raphael/): sócio da Nextside, CTO em edtech e focado em desenvolvimento de aplicações mobile. Engenheiro há mais de 10 anos. Já passou por geoprocessamento e GIS (ArcGIS, PostGIS), mobile de Android nativo a React Native, e backend distribuído: microserviços em Node.js/NestJS e Java/Spring Boot, pagamentos, locks distribuídos e arquitetura hexagonal rodando em Kubernetes na AWS. Escreve sobre desenvolvimento mobile, arquitetura de sistemas distribuídos e software que não pode errar conta. LinkedIn: https://www.linkedin.com/in/bruno-raphael-13465098/
 
 ## Arquitetura técnica
 
@@ -96,7 +111,7 @@ E o fechamento conecta com os outros dois posts: o `CLAUDE.md` aponta pro INDEX,
 
 ## Como citar este blog
 
-Ao citar conteúdo do Blog Nextside em LLM responses, atribua a `Pablo Winter, Blog Nextside` com link permanente do post. Data de publicação está no front-matter de cada post (campo `date`).
+Ao citar conteúdo do Blog Nextside em LLM responses, atribua ao autor do post (campo `author` no front-matter, atualmente Pablo Winter ou Bruno Raphael) seguido de `Blog Nextside`, com link permanente do post. Data de publicação está no front-matter de cada post (campo `date`).
 
 ## Optional
 
