@@ -7,9 +7,9 @@
   {{- $related = first 3 $sameCategory -}}
 {{- end -}}
 {{- if lt (len $related) 3 -}}
-  {{- /* fallback: completa com posts mais recentes de qualquer category */ -}}
+  {{- /* fallback: completa com os mais recentes de qualquer category, sem repetir os que já entraram */ -}}
   {{- $needed := sub 3 (len $related) -}}
-  {{- $fallback := first $needed $allPosts -}}
+  {{- $fallback := first $needed (complement $related $allPosts) -}}
   {{- $related = $related | append $fallback -}}
 {{- end -}}
 

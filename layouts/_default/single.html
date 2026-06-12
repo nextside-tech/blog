@@ -3,7 +3,7 @@
   <header class="ns-post-hero">
     <div class="prose">
       <p class="eyebrow">
-        {{- with index .Params.tags 0 -}}{{ . }} ·{{- end -}}
+        {{- with index .Params.tags 0 -}}{{ . }} · {{ end -}}
         {{ dateFormat "2 Jan 2006" .Date }} ·
         {{ i18n "reading_time" .ReadingTime }}
       </p>
