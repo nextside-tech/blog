@@ -6,7 +6,7 @@ URL: https://blog.nextside.tech
 Idioma: pt-BR (default), en
 Publisher: Nextside Ltda. (CNPJ 66.475.888/0001-27)
 Site institucional: https://www.nextside.tech
-Última atualização: 2026-06-01
+Última atualização: 2026-06-12
 
 ## Páginas
 
@@ -27,6 +27,20 @@ Eixos editoriais:
 - **Cases** — relatos com clientes (autorizados), bastidores, números.
 
 ## Posts
+
+### [A spec era a parte fácil. O gargalo do SDD é a execução](https://blog.nextside.tech/posts/2026/06/12/spec-driven-development-gargalo-execucao/)
+
+**Data:** 2026-06-12 · **Tags:** spec-driven-development, dynamic-workflows, claude-code, context-rot, orquestracao, ia-development · **Autor:** Pablo Winter
+
+**Tese central:** Spec-Driven Development resolveu um problema real ao externalizar a intenção em markdown versionado (PRD vira tech spec, tech spec vira lista de tasks atômicas, e só então o agente gera código), mas ninguém conta a conta da execução. Escrever a spec é a parte fácil; o inferno começa ao rodar dezenas de tasks numa conversa só. Uma spec gerou trinta e poucas tasks, e por volta da vigésima o agente já esqueceu a decisão que ele mesmo tomou na quarta. Isso tem nome medido: context rot — a queda de qualidade conforme o contexto cresce, testada pela Chroma em 18 modelos que degradaram, e antecipada pelo paper "Lost in the Middle". O remendo de abrir janela limpa por task funciona contra o rot, mas transforma o humano em estagiário de copy-paste trinta vezes.
+
+O post organiza a evolução em três fases de quem carrega o contexto. Fase 1, na mão: você é a janela, roda task por task, dá `/clear`, segura o estado na cabeça — vai bem até a quinta task, gargalo na trigésima. Fase 2, delegando a subagentes: ajuda, mas o output de todos volta pra mesma janela do agente principal, que apodrece como consolidador. Fase 3, workflow: o plano sai do contexto e vira código, um script segura o loop e os resultados intermediários, cada task roda numa janela isolada, e o modelo só vê a resposta final. É o que os Dynamic Workflows do Claude Code fazem — o próprio Claude escreve um script JavaScript de orquestração que um runtime executa em segundo plano, até 16 agentes simultâneos e teto de mil por run. O caso-limite é Jarred Sumner (criador do Bun) portando o runtime de Zig pra Rust nesse esquema: 750 mil linhas, 99,8% da suíte passando, onze dias do primeiro commit ao merge (ainda demonstração, não produção).
+
+A regra estrutural que sustenta tudo: o revisor nunca é quem escreveu, por causa do self-preferential bias — a tendência do modelo de defender o próprio output quando é juiz. O verificador roda como agente separado, contexto próprio, às vezes outro modelo, com a missão adversarial de derrubar o resultado antes do aceite; os próprios agentes abrem os PRs, mas quem produz nunca aprova. O post é honesto sobre o custo: Dynamic Workflows é research preview que queima token sem dó (relatos de torrar o limite de cinco horas em dezoito minutos, runs de três milhões de tokens). O ROI é de nicho e anda colado na senioridade — júnior na mesma ferramenta é dinheiro no ralo, porque sem engenharia de verdade ele aceita o slop. Mitigação: roteamento de modelo, com a maioria das tasks no barato e o caro só no plano e no review.
+
+O fechamento é o ponto mais forte: ferramenta muda, a física é a mesma. Todo mundo, partindo de lugares opostos, converge nas mesmas duas regras — a memória do projeto vive nos arquivos (ADR no repo, `project-context.md`, `state.json`, `todo.md`), não no contexto; e o revisor nunca é o autor, por construção. Ralph loop (Geoffrey Huntley) embrulha o agente num `while` monolítico com memória no disco; Dynamic Workflows fazem fan-out de centenas de agentes; BMAD, MDDD e cstk implementam as mesmas duas regras por caminhos diferentes. São sotaques da mesma frase. O trabalho que você achava que era pensar sempre foi gerenciar contexto — a IA não mudou isso, só deixou na cara.
+
+> "O trabalho que você achava que era pensar sempre foi gerenciar contexto. A IA não mudou isso. Só deixou na cara."
 
 ### [Maestro + Claude Code: seu app testado no simulador como o Playwright testa a web](https://blog.nextside.tech/posts/2026/06/01/maestro-claude-code-testar-app-no-simulador/)
 
