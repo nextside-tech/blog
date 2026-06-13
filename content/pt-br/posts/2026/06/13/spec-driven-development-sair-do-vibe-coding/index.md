@@ -1,6 +1,6 @@
 ---
 title: "Spec-driven development: sair do vibe coding travado"
-date: 2026-06-12T09:00:00-03:00
+date: 2026-06-13T08:00:00-03:00
 draft: false
 translationKey: spec-driven-development-sair-do-vibe-coding
 category: tecnologia

@@ -6,7 +6,7 @@ URL: https://blog.nextside.tech
 Idioma: pt-BR (default), en
 Publisher: Nextside Ltda. (CNPJ 66.475.888/0001-27)
 Site institucional: https://www.nextside.tech
-Última atualização: 2026-06-12
+Última atualização: 2026-06-13
 
 ## Páginas
 
@@ -42,9 +42,9 @@ O fechamento é o ponto mais forte: ferramenta muda, a física é a mesma. Todo 
 
 > "O trabalho que você achava que era pensar sempre foi gerenciar contexto. A IA não mudou isso. Só deixou na cara."
 
-### [Spec-driven development: sair do vibe coding travado](https://blog.nextside.tech/posts/2026/06/12/spec-driven-development-sair-do-vibe-coding/)
+### [Spec-driven development: sair do vibe coding travado](https://blog.nextside.tech/posts/2026/06/13/spec-driven-development-sair-do-vibe-coding/)
 
-**Data:** 2026-06-12 · **Tags:** spec-driven-development, vibe-coding, ai-tooling, agentes-de-ia, arquitetura · **Autor:** Lucas Israel
+**Data:** 2026-06-13 · **Tags:** spec-driven-development, vibe-coding, ai-tooling, agentes-de-ia, arquitetura · **Autor:** Lucas Israel
 
 **Tese central:** vibe coding — descrever o que você quer e deixar a IA improvisar — é ótimo pra descobrir o quê construir, e péssimo pra sustentar o que já existe. O ponto de virada é familiar pra quem é CTO: o MVP saiu numa semana, o time dobrou de velocidade, e agora cada feature nova quebra duas antigas e cada PR de IA precisa de três rodadas de review porque o agente "esqueceu" uma decisão que nunca foi escrita. O diagnóstico do post é que o vibe coding não falha por ser IA — falha por ser ambíguo: num prompt solto o modelo tem 30 formas de implementar a mesma coisa, roda duas vezes e sai diferente, e o código vira a única fonte de verdade, mudando a cada geração. O gargalo deixou de ser escrever código e virou alinhar contexto.
 
